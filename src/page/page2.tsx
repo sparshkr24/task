@@ -4,13 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Accordian from "../Components/Accordian";
+import { postDataType } from "../helper/types";
 
-interface postDataType {
-  userId: number;
-  id: number;
-  title: string;
-  body: string;
-}
 
 const columns: GridColDef[] = [
   { field: "userId", headerName: "User Id", width: 90 },
@@ -76,7 +71,19 @@ const Page2 = () => {
         />
       </Box>
       <br />
-      <Box sx={{padding: "12px"}}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "50vh",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          padding: "10px",
+          borderRadius: "10px",
+          backgroundColor: "#fff",
+        }}
+      >
         <Accordian />
       </Box>
     </div>
