@@ -17,34 +17,34 @@
 ### Page 2
 - Displays a Material UI (MUI) data grid that fetches dummy data from an API using Axios library.
 - Includes an accordion component displaying departments and their sub-departments.
+- Accordian requirements:
+  1. Users can expand and collapse sub-departments.
+  2. Users can select departments or sub-departments.
+  3. If a user selects a department, all its sub-departments will be selected in the UI.
+  4. If all sub-departments of a department are selected, the parent department will also be selected.
 
-#### Accordion Functionality
-- Users can expand and collapse sub-departments.
-- Users can select departments or sub-departments.
-- If a user selects a department, all its sub-departments will be selected in the UI.
-- If all sub-departments of a department are selected, the parent department will also be selected.
-
-- Users cannot access Page 1 before logging out from Page 2. Logging out removes userDetails from localStorage.
+- Users cannot access Page 1 before logging out from Page 2. (Logging out removes userDetails from localStorage.)
 
 ## Folder Structure
 
--src
--Components
--Accordian.tsx (Component 2 for Page 2)
--Table (Component 1 for Page 1)
+- src
+  - Components
+    - Accordian.tsx (Component 2 for Page 2)
+    - Table (Component 1 for Page 1)
+  - helper
+    - helper.ts (Contains helper functions for the Accordion component)
+    - types.ts (Contains interfaces and types for code modularity and reusability)
+  - page
+    - page1.tsx (Layout for Page 1)
+    - page2.tsx (Layout for Page 2)
+  - App.tsx (Contains React routes and navigation links)
+  - main.tsx (Main file)
 
--helper
--helper.ts (Contains helper functions for the Accordion component)
--types.ts (Contains interfaces and types for code modularity and reusability)
-
--page
--page1.tsx (Layout for Page 1)
--page2.tsx (Layout for Page 2)
-
--App.tsx (Contains React routes and navigation links)
--main.tsx (Main file)
-
-
+## Getting started
+```bash
+npm install
+npm run dev
+```
 
 
 # React + TypeScript + Vite
