@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Page1 from "./page/page1";
 import Page2 from "./page/page2";
+import Page404 from "./page/Page404"
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/*",
-    element: <div>404 not found</div>,
+    element: <Page404 />,
   },
 ]);
 

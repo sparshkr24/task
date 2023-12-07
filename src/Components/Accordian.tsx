@@ -1,6 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Checkbox from "@mui/material/Checkbox";
-import { changeAllSubDept, changeDept } from "../helper/helper";
+import {
+  changeAllSubDept,
+  changeDept,
+  initializeDept,
+  initializeSubDept,
+} from "../helper/helper";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 import { DeptCheckType, SubDeptCheckType, deptDataType } from "../helper/types";
 
 const dept: deptDataType[] = [
@@ -14,16 +21,10 @@ const dept: deptDataType[] = [
   },
 ];
 
+const subDeptCheck: SubDeptCheckType = initializeSubDept(dept);
+const deptCheck: DeptCheckType = initializeDept(dept);
+
 const Accordian = () => {
-  const subDeptCheck: SubDeptCheckType = [];
-  dept.map((item) => {
-    const size = item.sub_departments.length;
-    const initialArray: boolean[] = new Array(size).fill(false);
-    subDeptCheck.push(initialArray);
-  });
-
-  const deptCheck: DeptCheckType = new Array(subDeptCheck.length).fill(false);
-
   const [selected, setSelected] = useState<string[]>([]);
   const [deptCheckState, setDeptCheckState] = useState<DeptCheckType>(deptCheck);
   const [subDeptCheckState, setSubDeptCheckState] = useState<SubDeptCheckType>(subDeptCheck);
@@ -66,42 +67,64 @@ const Accordian = () => {
     setSelected(updatedSelected);
   };
 
-  useEffect(() => {
-    console.log("dept: ", deptCheckState);
-    console.log("subDept: ", subDeptCheckState);
-  }, [deptCheckState, subDeptCheckState]);
-
   return (
-    <div>
+    <Box>
       {dept.map((item, index) => (
         <div key={item.department}>
-          <div>
-            <span onClick={() => toggleDepartment(item.department)}>
-              {selected.includes(item.department) ? " -" : " +"}
-            </span>
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: '8px',
+            }}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                cursor: 'pointer',
+                marginRight: '8px',
+              }}
+              onClick={() => toggleDepartment(item.department)}
+            >
+              {selected.includes(item.department) ? '-' : '+'}
+            </Typography>
             <Checkbox
               checked={deptCheckState[index]}
               onChange={() => handleDeptCheckbox(index)}
             />
-            <span> {item.department}</span>
-          </div>
+            <Typography variant="body1" sx={{ marginLeft: '8px' }}>
+              {item.department}
+            </Typography>
+          </Box>
           {selected.includes(item.department) && (
-            <div>
+            <Box sx={{ marginLeft: '20px' }}>
               {item.sub_departments.map((subDept, idx) => (
-                <div key={idx}>
+                <Box
+                  key={idx}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    marginBottom: '8px',
+                  }}
+                >
                   <Checkbox
                     checked={subDeptCheckState[index][idx]}
                     onChange={() => handleSubDeptCheckbox(index, idx)}
                   />
-                  <span>{subDept}</span>
-                </div>
+                  <Typography variant="body2" sx={{ marginLeft: '8px' }}>
+                    {subDept}
+                  </Typography>
+                </Box>
               ))}
-            </div>
+            </Box>
           )}
         </div>
       ))}
-    </div>
+    </Box>
   );
 };
 
 export default Accordian;
+
+
+

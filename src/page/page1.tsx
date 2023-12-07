@@ -30,7 +30,6 @@ const Page1 = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Assuming validation is done here before redirection
     if (
       formData.name &&
       formData.phoneNumber.length === 10 &&
@@ -51,7 +50,7 @@ const Page1 = () => {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          minHeight: "100vh",
+          minHeight: "60vh",
           boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
           padding: "30px",
           borderRadius: "10px",

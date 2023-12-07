@@ -1,37 +1,17 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
-import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import Accordian from "../Components/Accordian";
-import { postDataType } from "../helper/types";
-
-
-const columns: GridColDef[] = [
-  { field: "userId", headerName: "User Id", width: 90 },
-  {
-    field: "id",
-    headerName: "Id",
-    width: 90,
-    editable: true,
-  },
-  {
-    field: "title",
-    headerName: "Title",
-    width: 500,
-    editable: true,
-  },
-  {
-    field: "body",
-    headerName: "Body",
-    width: 710,
-    editable: true,
-  },
-];
+import Table from "../Components/Table";
+import Button from "@mui/material/Button";
 
 const Page2 = () => {
   const navigate = useNavigate();
-  const [postData, setPostData] = useState<postDataType[]>([]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userDetails");
+    navigate("/page1");
+  };
 
   useEffect(() => {
     const userDetails = localStorage.getItem("userDetails");
@@ -41,36 +21,25 @@ const Page2 = () => {
     }
   }, [navigate]);
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      const res = await axios.get("https://jsonplaceholder.typicode.com/posts");
-      // console.log("res: ", res.data);
-
-      setPostData(res.data);
-    };
-    fetchPosts();
-  }, []);
-
   return (
-    <div>
+    <Box sx={{ margin: "8px" }}>
       <h1>Page 2</h1>
-      <Box sx={{ width: "100%" }}>
-        <DataGrid
-          rows={postData}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 10,
-              },
-            },
-          }}
-          pageSizeOptions={[5, 10, 20]}
-          checkboxSelection
-          disableRowSelectionOnClick
-        />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "10px",
+        }}
+      >
+        <h3>Component 1</h3>
+        <Button variant="contained" onClick={handleLogout}>
+          Logout
+        </Button>
       </Box>
+      <Table />
       <br />
+      <h3>Component 2</h3>
       <Box
         sx={{
           display: "flex",
@@ -86,7 +55,7 @@ const Page2 = () => {
       >
         <Accordian />
       </Box>
-    </div>
+    </Box>
   );
 };
 
